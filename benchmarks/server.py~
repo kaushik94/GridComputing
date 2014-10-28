@@ -15,7 +15,7 @@ def chunks(seq, num):
 
 class server():
 
-	def __init__(self, sock=6000, ip='localhost', authkey='secret password', MAX=3):
+	def __init__(self, sock=8000, ip='localhost', authkey='secret password', MAX=3):
 		self.sock = sock
 		self.ip = ip
 		self.authkey = authkey
@@ -63,6 +63,7 @@ class server():
 			conn.close()
 		self.socket.close()
 		t = time.time() - now
+		X = []
 		X.append(["time", t])
 		print tabulate(X, tablefmt='rst')
 		#print str("Took me " + str(t) + " time")

@@ -1,6 +1,7 @@
 import sys
 from multiprocessing.connection import Listener, Client
 import fileprocessing as fp
+from tabulate import tabulate
 
 """
 class client():
@@ -19,13 +20,14 @@ class client():
 		self.conn.close()
 """
 
-address = ('localhost', 6000)
+address = ('localhost', 8000)
 conn = Client(address, authkey='secret password')
 _jobs = conn.recv()
 train = []
 headers = ["File Name", "file review type"]
-table = zip([i[0][30:len(i[0])-1] for i in A], [i[1] for i in A])
-print tabulate(table, headers, tablefmt="grid")
+A = _jobs
+#table = zip([i[0][30:len(i[0])-1] for i in A], [i[1] for i in A])
+#print tabulate(table, headers, tablefmt="grid")
 """
 print "This client is running the following files "
 print "file name                 tag"
