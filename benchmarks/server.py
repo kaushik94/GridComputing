@@ -1,5 +1,6 @@
 from multiprocessing.connection import Client, Listener
 import time
+from tabulate import tabulate
 
 def chunks(seq, num):
   avg = len(seq) / float(num)
@@ -54,6 +55,7 @@ class server():
 			if next < 0:
 				break
 
+
 		now = time.time()
 		for conn in self.connections:
 			x = conn.recv()
@@ -61,5 +63,7 @@ class server():
 			conn.close()
 		self.socket.close()
 		t = time.time() - now
-		print str("Took me " + str(t) + " time")
+		X.append(["time", t])
+		print tabulate(X, tablefmt='rst')
+		#print str("Took me " + str(t) + " time")
 		return self.outputs

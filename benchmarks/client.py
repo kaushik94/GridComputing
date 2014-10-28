@@ -23,12 +23,17 @@ address = ('localhost', 6000)
 conn = Client(address, authkey='secret password')
 _jobs = conn.recv()
 train = []
+headers = ["File Name", "file review type"]
+table = zip([i[0][30:len(i[0])-1] for i in A], [i[1] for i in A])
+print tabulate(table, headers, tablefmt="grid")
+"""
 print "This client is running the following files "
 print "file name                 tag"
+"""
 for _job in _jobs:
 	_file, tag = _job
-	print _file,
-	print "              "
-	print tag
+	#print _file,
+	#print "              "
+	#print tag
 	train.append(fp.parse_movie_tags(_file, tag))
 conn.send(train)

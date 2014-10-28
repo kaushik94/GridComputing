@@ -4,21 +4,28 @@ from textblob.classifiers import NaiveBayesClassifier
 from textblob import TextBlob
 import glob
 import sysinfo as si
+import sys
+from tabulate import tabulate
 
 def train(num_training=20, num_test=10):
     input_files = glob.glob('MovieReviews/txt_sentoken/pos/*.txt')
-    s = server(MAX=5)
+    s = server(MAX=int(sys.argv[1]))
     A = [(inp, 'pos') for inp in input_files[0:num_training]]
     input_files = glob.glob('MovieReviews/txt_sentoken/neg/*.txt')
     A.extend([(inp, 'neg') for inp in input_files[0:num_training]])
     s.addJobs(A)
     #print A
     print "Traing classifier on the following files: "
-    print "File name          file type"
+    #print "File name          file type"
+    headers = ["File Name", "file review type"]
+    table = zip([i[0][30:len(i[0])-1] for i in A], [i[1] for i in A])
+    print tabulate(table, headers, tablefmt="grid")
+    """
     for i in A:
 	print i[0][26:len(i[0])-1],
         print "       ",
 	print i[1]
+    """
     training = s.start()
     cl = NaiveBayesClassifier(training)
     return cl

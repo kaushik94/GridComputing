@@ -7,3 +7,6 @@ python setup.py install
 cd ..
 cd psutil
 python setup.py install
+cd ..
+cd tabulate
+python setup.py install
