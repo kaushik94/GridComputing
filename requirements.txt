@@ -1,0 +1,8 @@
+*nix OS preferably Ubuntu 14.04
+python-dev
+python-setuptools
+
+This software comes with the following packages to make your life easier:
+	1. TextBlob
+	2. psutils
+	3. nltk
